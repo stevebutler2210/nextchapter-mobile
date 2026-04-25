@@ -1,0 +1,86 @@
+{
+  "name": "nextchapter-mobile",
+  "slug": "nextchapter-mobile",
+  "scheme": "nextchapter-mobile",
+  "version": "1.0.0",
+  "orientation": "portrait",
+  "userInterfaceStyle": "automatic",
+  "icon": "./assets/images/app-icon-all.png",
+  "updates": {
+    "fallbackToCacheTimeout": 0
+  },
+  "newArchEnabled": true,
+  "jsEngine": "hermes",
+  "assetBundlePatterns": [
+    "**/*"
+  ],
+  "android": {
+    "icon": "./assets/images/app-icon-android-legacy.png",
+    "package": "com.nextchapter.mobile",
+    "adaptiveIcon": {
+      "foregroundImage": "./assets/images/app-icon-android-adaptive-foreground.png",
+      "backgroundImage": "./assets/images/app-icon-android-adaptive-background.png"
+    },
+    "allowBackup": false,
+    "edgeToEdgeEnabled": true
+  },
+  "ios": {
+    "icon": "./assets/images/app-icon-ios.png",
+    "supportsTablet": true,
+    "bundleIdentifier": "com.nextchapter.mobile",
+    "privacyManifests": {
+      "NSPrivacyAccessedAPITypes": [
+        {
+          "NSPrivacyAccessedAPIType": "NSPrivacyAccessedAPICategoryUserDefaults",
+          "NSPrivacyAccessedAPITypeReasons": [
+            "CA92.1"
+          ]
+        }
+      ]
+    },
+    "infoPlist": {
+      "ITSAppUsesNonExemptEncryption": false
+    }
+  },
+  "web": {
+    "favicon": "./assets/images/app-icon-web-favicon.png",
+    "bundler": "metro"
+  },
+  "plugins": [
+    "expo-localization",
+    "expo-font",
+    [
+      "expo-splash-screen",
+      {
+        "image": "./assets/images/app-icon-android-adaptive-foreground.png",
+        "imageWidth": 300,
+        "resizeMode": "contain",
+        "backgroundColor": "#191015"
+      }
+    ],
+    [
+      "react-native-edge-to-edge",
+      {
+        "android": {
+          "parentTheme": "Light",
+          "enforceNavigationBarContrast": false
+        }
+      }
+    ],
+    "expo-build-properties",
+    "expo-router"
+  ],
+  "experiments": {
+    "tsconfigPaths": true,
+    "typedRoutes": true
+  },
+  "extra": {
+    "ignite": {
+      "version": "11.5.0"
+    },
+    "router": {},
+    "eas": {
+      "projectId": "5e43b446-a81b-43cb-bc33-20f9b5a37509"
+    }
+  }
+}
