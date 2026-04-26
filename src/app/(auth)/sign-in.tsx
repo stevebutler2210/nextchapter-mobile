@@ -101,7 +101,7 @@ export default function SignIn() {
         Don&apos;t have an account?{" "}
         <Text
           className="text-primary text-sm font-medium"
-          onPress={() => router.push("/(auth)/sign-up" as any)}
+          onPress={() => router.push("/(auth)/sign-up")}
         >
           Sign up
         </Text>

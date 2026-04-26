@@ -1,5 +1,13 @@
 import { useCallback, useEffect, useState } from "react"
-import { ActivityIndicator, FlatList, RefreshControl, StyleSheet, View } from "react-native"
+import {
+  ActivityIndicator,
+  FlatList,
+  RefreshControl,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+} from "react-native"
+import { router } from "expo-router"
 
 import { Screen } from "@/components/Screen"
 import { StateBadge } from "@/components/StateBadge"
@@ -12,19 +20,21 @@ import { useAppTheme } from "@/theme/context"
 function ClubCard({ club }: { club: ClubSummary }) {
   const state = club.current_cycle?.state ?? null
   return (
-    <Card className="mb-3 rounded border-0 bg-surface-container-lowest px-0 shadow-none gap-0">
-      <CardHeader className="pb-2">
-        <CardTitle className="text-lg font-normal text-on-surface" style={styles.titleFont}>
-          {club.name}
-        </CardTitle>
-      </CardHeader>
-      <CardContent className="gap-2">
-        {state ? <StateBadge state={state} /> : null}
-        {club.description ? (
-          <Text className="text-sm text-outline leading-relaxed">{club.description}</Text>
-        ) : null}
-      </CardContent>
-    </Card>
+    <TouchableOpacity activeOpacity={0.7} onPress={() => router.push(`/(app)/club/${club.id}`)}>
+      <Card className="mb-3 rounded border-0 bg-surface-container-lowest px-0 shadow-none gap-0">
+        <CardHeader className="pb-2">
+          <CardTitle className="text-lg font-normal text-on-surface" style={styles.titleFont}>
+            {club.name}
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="gap-2">
+          {state ? <StateBadge state={state} /> : null}
+          {club.description ? (
+            <Text className="text-sm text-outline leading-relaxed">{club.description}</Text>
+          ) : null}
+        </CardContent>
+      </Card>
+    </TouchableOpacity>
   )
 }
 

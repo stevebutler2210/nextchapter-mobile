@@ -10,7 +10,7 @@ import { ApisauceInstance, create } from "apisauce"
 import Config from "@/config"
 
 import { getGeneralApiProblem, type GeneralApiProblem } from "./apiProblem"
-import type { ApiConfig, ApiErrorResponse, AuthResponse, ClubsResponse } from "./types"
+import type { ApiConfig, ApiErrorResponse, AuthResponse, ClubDetail, ClubsResponse } from "./types"
 
 /**
  * Configuring the apisauce instance.
@@ -119,6 +119,17 @@ export class Api {
       return { kind: problem?.kind ?? "unknown", data: undefined }
     }
     return { kind: "ok", data: response.data as ClubsResponse }
+  }
+
+  async getClub(
+    id: number,
+  ): Promise<{ kind: "ok"; data: ClubDetail } | { kind: string; data: undefined }> {
+    const response = await this.apisauce.get<{ data: ClubDetail }>(`/api/v1/clubs/${id}`)
+    if (!response.ok) {
+      const problem = getGeneralApiProblem(response)
+      return { kind: problem?.kind ?? "unknown", data: undefined }
+    }
+    return { kind: "ok", data: (response.data as any).data as ClubDetail }
   }
 }
 
