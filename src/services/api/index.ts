@@ -113,7 +113,6 @@ export class Api {
   async getClubs(): Promise<
     { kind: "ok"; data: ClubsResponse } | { kind: string; data: undefined }
   > {
-    console.log("Auth header:", this.apisauce.headers["Authorization"])
     const response = await this.apisauce.get<ClubsResponse>("/api/v1/clubs")
     if (!response.ok) {
       const problem = getGeneralApiProblem(response)
