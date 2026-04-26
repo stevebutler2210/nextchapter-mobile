@@ -33,7 +33,32 @@ export const useAuthStore = create<AuthState>((set) => ({
 
   rehydrate: async () => {
     const token = await SecureStore.getItemAsync(TOKEN_KEY)
-    if (token) api.setAuthToken(token)
+    if (token) {
+      api.setAuthToken(token)
+      api.setupInterceptors(async () => {
+        const refreshToken = await SecureStore.getItemAsync(REFRESH_TOKEN_KEY)
+        if (!refreshToken) return false
+
+        const response = await api.apisauce.post<any>("/api/v1/sessions/refresh", {
+          refresh_token: refreshToken,
+        })
+
+        if (response.ok && response.data?.data?.token) {
+          const { token: newToken, refresh_token: newRefreshToken } = response.data.data
+          await SecureStore.setItemAsync(TOKEN_KEY, newToken)
+          await SecureStore.setItemAsync(REFRESH_TOKEN_KEY, newRefreshToken)
+          api.setAuthToken(newToken)
+          return true
+        }
+
+        // Refresh failed — clear everything and force sign-out
+        await SecureStore.deleteItemAsync(TOKEN_KEY)
+        await SecureStore.deleteItemAsync(REFRESH_TOKEN_KEY)
+        api.clearAuthToken()
+        set({ token: null })
+        return false
+      })
+    }
     set({ token, hydrated: true })
   },
 }))

@@ -42,7 +42,12 @@ export class Api {
     })
   }
 
+  private interceptorsSetUp = false
+
   setupInterceptors(refreshFn: () => Promise<boolean>) {
+    if (this.interceptorsSetUp) return
+    this.interceptorsSetUp = true
+
     this.apisauce.axiosInstance.interceptors.response.use(
       (response) => response,
       async (error) => {

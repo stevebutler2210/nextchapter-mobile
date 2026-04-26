@@ -21,7 +21,7 @@ export default function SignIn() {
   const [password, setPassword] = useState("")
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
-  const setToken = useAuthStore((state) => state.setToken)
+  const setTokens = useAuthStore((state) => state.setTokens)
 
   async function handleSignIn() {
     setLoading(true)
@@ -30,7 +30,7 @@ export default function SignIn() {
     setLoading(false)
 
     if (result.kind === "ok") {
-      await setToken(result.data!.token)
+      await setTokens(result.data!.token, result.data!.refresh_token)
       router.replace("/(app)/(tabs)/clubs" as any)
     } else if (result.data?.error) {
       setError(result.data.error)
