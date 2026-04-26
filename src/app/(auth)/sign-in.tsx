@@ -27,7 +27,7 @@ export default function SignIn() {
     setLoading(false)
 
     if (result.kind === "ok") {
-      setToken(result.data!.token)
+      await setToken(result.data!.token)
       router.replace("/(app)/(tabs)/clubs" as any)
     } else if (result.data?.error) {
       setError(result.data.error)
