@@ -1,6 +1,5 @@
-import Svg, { Rect } from "react-native-svg"
-
 import { colors } from "@stevebutler2210/nextchapter-design-tokens/tokens"
+import Svg, { Rect } from "react-native-svg"
 
 type GatheredVolumesLogoProps = {
   size?: number

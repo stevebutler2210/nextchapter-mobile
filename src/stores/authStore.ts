@@ -45,7 +45,10 @@ export const useAuthStore = create<AuthState>((set) => ({
           "Current auth header before refresh attempt:",
           api.apisauce.headers["Authorization"],
         )
-        console.log("Auth token in store before refresh attempt:", api.apisauce.headers["Authorization"]?.replace("Bearer ", ""))
+        console.log(
+          "Auth token in store before refresh attempt:",
+          api.apisauce.headers["Authorization"]?.replace("Bearer ", ""),
+        )
 
         if (!refreshToken) return false
 
