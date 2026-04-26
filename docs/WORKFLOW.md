@@ -24,12 +24,12 @@ per day of work.
 Four docs carry the project's thinking. They are deliberately short — the full
 set can be read in under fifteen minutes.
 
-| Doc | What it's for | Where it lives |
-|---|---|---|
-| `docs/PLAN.md` | The day-0 plan. Committed at the start, not rewritten. | Both repos |
+| Doc                 | What it's for                                                                                                                 | Where it lives     |
+| ------------------- | ----------------------------------------------------------------------------------------------------------------------------- | ------------------ |
+| `docs/PLAN.md`      | The day-0 plan. Committed at the start, not rewritten.                                                                        | Both repos         |
 | `docs/DECISIONS.md` | Architecture Decision Records (Nygard format): one entry per meaningful choice, covering context, decision, and consequences. | `nextchapter` only |
-| `docs/JOURNAL.md` | A short daily log. What shipped, what blocked, what changed from the plan. | `nextchapter` only |
-| `docs/WORKFLOW.md` | This document. | Both repos |
+| `docs/JOURNAL.md`   | A short daily log. What shipped, what blocked, what changed from the plan.                                                    | `nextchapter` only |
+| `docs/WORKFLOW.md`  | This document.                                                                                                                | Both repos         |
 
 The `nextchapter-mobile` README links to DECISIONS.md and JOURNAL.md in the
 Rails repo. A single source of truth covers the whole project, including
@@ -56,18 +56,18 @@ Conventional Commits, with a lightweight scope rule.
 
 ### Types used
 
-| Type | When |
-|---|---|
-| `feat` | A user-visible feature or behaviour change |
-| `fix` | A bug fix |
-| `refactor` | Internal change, no behaviour change |
-| `test` | Adding or changing tests |
-| `perf` | Performance-motivated change |
-| `docs` | Docs only |
-| `chore` | Tooling, dependencies, housekeeping |
-| `ci` | CI config |
-| `build` | Build system / dependencies |
-| `style` | Formatting only, no code change |
+| Type       | When                                       |
+| ---------- | ------------------------------------------ |
+| `feat`     | A user-visible feature or behaviour change |
+| `fix`      | A bug fix                                  |
+| `refactor` | Internal change, no behaviour change       |
+| `test`     | Adding or changing tests                   |
+| `perf`     | Performance-motivated change               |
+| `docs`     | Docs only                                  |
+| `chore`    | Tooling, dependencies, housekeeping        |
+| `ci`       | CI config                                  |
+| `build`    | Build system / dependencies                |
+| `style`    | Formatting only, no code change            |
 
 ### Scopes
 
@@ -100,6 +100,33 @@ footer to the commit message explaining the break and the migration path.
 
 ---
 
+## Mobile-specific: running the app
+
+Always use the dev client, not Expo Go:
+
+```bash
+pnpm run ios       # iOS simulator
+pnpm run android   # Android emulator
+```
+
+Metro cache issues: `pnpm start -c` clears the cache.
+
+Watchman issues: `watchman watch-del-all` then restart Metro.
+
+## Mobile-specific: design tokens
+
+The `@stevebutler2210/nextchapter-design-tokens` package requires a GitHub PAT with `read:packages` scope. Set `PACKAGES_TOKEN` as a shell environment variable and as a GitHub Actions secret. See the main README for setup steps.
+
+Never edit token values in `global.css` directly — all token changes go through the tokens package and must be reflected in `docs/DESIGN.md` first.
+
+## Mobile-specific: styling
+
+Use Uniwind (`className` prop) for all layout and colour. Do not use inline `StyleSheet` for anything token-driven. The exception is Ignite's existing `$styles` helpers for screen-level layout — leave those in place.
+
+NativeWind was evaluated and rejected due to a Metro 0.83.6 incompatibility (`react-native-css-interop` `addedFiles` crash on file save). See ADR for full details.
+
+---
+
 ## Tickets
 
 Every unit of work is a GitHub issue. Issues use one of two templates.
@@ -108,19 +135,23 @@ Every unit of work is a GitHub issue. Issues use one of two templates.
 
 ```markdown
 ## Context
+
 One or two sentences. What is this and why does it exist?
 Link to any DECISIONS.md entry if one applies.
 
 ## Acceptance criteria
+
 - [ ] Behaviour 1 (user-visible where possible)
 - [ ] Behaviour 2
 - [ ] Behaviour 3
 
 ## Notes
+
 Anything worth capturing but not a hard requirement — guide links to read
 first, open questions, things to verify.
 
 ## Out of scope
+
 What this ticket explicitly does not cover.
 ```
 
@@ -130,29 +161,32 @@ For reading docs before implementing something new.
 
 ```markdown
 ## Goal
+
 What do I need to understand before I can implement X?
 
 ## Source(s)
+
 - Guide link 1
 - Guide link 2
 
 ## Outcome
+
 A short note in DECISIONS.md or a comment on the related feature ticket,
 capturing what I learned and any implementation implications.
 ```
 
 ### Labels
 
-| Label | Purpose |
-|---|---|
-| `tier-1-core` | Must ship for the project to be credible |
-| `tier-2-polish` | Nice-to-have (monitoring, additional API surfaces, deploy hardening) |
-| `tier-3-stretch` | Beyond the committed scope — only if genuinely ahead |
-| `backend` | Lives in the Rails repo |
-| `mobile` | Lives in the mobile repo |
-| `modern-rails` | Touches a Rails feature new to the author; read the guide first |
-| `spike` | A learning ticket, not a feature |
-| `decision` | Has a corresponding DECISIONS.md entry |
+| Label            | Purpose                                                              |
+| ---------------- | -------------------------------------------------------------------- |
+| `tier-1-core`    | Must ship for the project to be credible                             |
+| `tier-2-polish`  | Nice-to-have (monitoring, additional API surfaces, deploy hardening) |
+| `tier-3-stretch` | Beyond the committed scope — only if genuinely ahead                 |
+| `backend`        | Lives in the Rails repo                                              |
+| `mobile`         | Lives in the mobile repo                                             |
+| `modern-rails`   | Touches a Rails feature new to the author; read the guide first      |
+| `spike`          | A learning ticket, not a feature                                     |
+| `decision`       | Has a corresponding DECISIONS.md entry                               |
 
 ### Milestones
 
@@ -179,7 +213,7 @@ for day 9's work will be wrong by the time it's needed.
 ## Pull requests
 
 - One PR per ticket. Title matches the ticket — `feat(backend): add Club and
-  Membership models`.
+Membership models`.
 - PR description includes `Closes #N` so the ticket auto-closes on merge.
 - PR description is 2–3 lines: what this does, any trade-off worth noting.
 - CI must pass before merge.

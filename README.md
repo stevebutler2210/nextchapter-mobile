@@ -1,81 +1,70 @@
 # nextchapter-mobile
 
-NextChapter Portfolio / Learning Project—React Native Mobile App
+React Native companion app for [NextChapter](https://nextchapter.fly.dev) — a quiet space for intentional readers to gather.
 
-[Ignite boilerplate follows—readme will be updated tomorrow]
+Built with Expo SDK 55, Expo Router, TypeScript, Uniwind, and React Native Reusables. Authenticates against the NextChapter Rails API via JWT.
 
-> The latest and greatest boilerplate for Infinite Red opinions
+## Prerequisites
 
-This is the boilerplate that [Infinite Red](https://infinite.red) uses as a way to test bleeding-edge changes to our React Native stack.
+- Node 20+
+- pnpm
+- Expo CLI (`pnpm add -g expo-cli`)
+- A running instance of the [nextchapter](https://github.com/stevebutler2210/nextchapter) Rails API (local or deployed)
+- GitHub Packages token with `read:packages` scope (for design tokens)
 
-- [Quick start documentation](https://github.com/infinitered/ignite/blob/master/docs/boilerplate/Boilerplate.md)
-- [Full documentation](https://github.com/infinitered/ignite/blob/master/docs/README.md)
-
-## Getting Started
+## Setup
 
 ```bash
+# Set your GitHub Packages token
+export PACKAGES_TOKEN=your_token_here
+
+# Install dependencies
 pnpm install
-pnpm run start
+
+# Start the dev server
+pnpm start
 ```
 
-To make things work on your local simulator, or on your phone, you need first to [run `eas build`](https://github.com/infinitered/ignite/blob/master/docs/expo/EAS.md). We have many shortcuts on `package.json` to make it easier:
+Open in a dev build on iOS simulator:
 
 ```bash
-pnpm run build:ios:sim # build for ios simulator
-pnpm run build:ios:device # build for ios device
-pnpm run build:ios:prod # build for ios device
+pnpm run ios
 ```
 
-### `./assets`
+> Expo Go is not supported — a development build is required due to native modules.
 
-This directory is designed to organize and store various assets, making it easy for you to manage and use them in your application. The assets are further categorized into subdirectories, including `icons` and `images`:
+## Environment
 
-```tree
-assets
-├── icons
-└── images
+Copy `.env.example` to `.env.local` and set:
+
+```bash
+EXPO_PUBLIC_API_URL=http://localhost:3000
 ```
 
-**icons**
-This is where your icon assets will live. These icons can be used for buttons, navigation elements, or any other UI components. The recommended format for icons is PNG, but other formats can be used as well.
+For the deployed API use `https://nextchapter.fly.dev`.
 
-Ignite comes with a built-in `Icon` component. You can find detailed usage instructions in the [docs](https://github.com/infinitered/ignite/blob/master/docs/boilerplate/app/components/Icon.md).
+## Design tokens
 
-**images**
-This is where your images will live, such as background images, logos, or any other graphics. You can use various formats such as PNG, JPEG, or GIF for your images.
+Styles are driven by the shared `@stevebutler2210/nextchapter-design-tokens` package, published to GitHub Packages. This is the single source of truth for colours, spacing, and typography across both the Rails app and this mobile app. See [`docs/DESIGN.md`](../nextchapter/docs/DESIGN.md) for the full design record.
 
-Another valuable built-in component within Ignite is the `AutoImage` component. You can find detailed usage instructions in the [docs](https://github.com/infinitered/ignite/blob/master/docs/Components-AutoImage.md).
+## Stack
 
-How to use your `icon` or `image` assets:
+| Concern    | Choice                                             |
+| ---------- | -------------------------------------------------- |
+| Framework  | Expo SDK 55 / React Native 0.83                    |
+| Navigation | Expo Router (file-based)                           |
+| Styling    | Uniwind (Tailwind v4 for React Native)             |
+| Components | React Native Reusables                             |
+| Auth       | JWT via Rails API, persisted with Expo SecureStore |
+| HTTP       | apisauce                                           |
+| State      | React context + hooks                              |
 
-```typescript
-import { Image } from 'react-native';
+## Screens
 
-const MyComponent = () => {
-  return (
-    <Image source={require('assets/images/my_image.png')} />
-  );
-};
-```
-
-## Running Maestro end-to-end tests
-
-Follow our [Maestro Setup](https://ignitecookbook.com/docs/recipes/MaestroSetup) recipe.
-
-## Next Steps
-
-### Ignite Cookbook
-
-[Ignite Cookbook](https://ignitecookbook.com/) is an easy way for developers to browse and share code snippets (or “recipes”) that actually work.
-
-### Upgrade Ignite boilerplate
-
-Read our [Upgrade Guide](https://ignitecookbook.com/docs/recipes/UpdatingIgnite) to learn how to upgrade your Ignite project.
-
-## Community
-
-⭐️ Help us out by [starring on GitHub](https://github.com/infinitered/ignite), filing bug reports in [issues](https://github.com/infinitered/ignite/issues) or [ask questions](https://github.com/infinitered/ignite/discussions).
-
-💬 Join us on [Slack](https://join.slack.com/t/infiniteredcommunity/shared_invite/zt-1f137np4h-zPTq_CbaRFUOR_glUFs2UA) to discuss.
-
-📰 Make our Editor-in-chief happy by [reading the React Native Newsletter](https://reactnativenewsletter.com/).
+| Screen            | Status         |
+| ----------------- | -------------- |
+| Sign in           | Day 9          |
+| Sign up           | Day 9          |
+| Clubs list        | Day 9          |
+| Club detail       | Day 9          |
+| ISBN barcode scan | Day 9 (tier 2) |
