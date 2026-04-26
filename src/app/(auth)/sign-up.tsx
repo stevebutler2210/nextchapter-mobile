@@ -24,7 +24,7 @@ export default function SignUp() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [fieldErrors, setFieldErrors] = useState<Record<string, string[]>>({})
-  const setToken = useAuthStore((state) => state.setToken)
+  const setTokens = useAuthStore((state) => state.setTokens)
 
   async function handleSignUp() {
     setLoading(true)
@@ -34,7 +34,7 @@ export default function SignUp() {
     setLoading(false)
 
     if (result.kind === "ok") {
-      await setToken(result.data!.token)
+      await setTokens(result.data!.token, result.data!.refresh_token)
       router.replace("/(app)/(tabs)/clubs" as any)
     } else if (result.data?.errors) {
       setFieldErrors(result.data.errors as Record<string, string[]>)
