@@ -1,7 +1,8 @@
-import { Slot } from "expo-router"
-import { useAuthStore } from "@/stores/authStore"
-import { router } from "expo-router"
 import { useEffect } from "react"
+import { Slot } from "expo-router"
+import { router } from "expo-router"
+
+import { useAuthStore } from "@/stores/authStore"
 
 export default function AppLayout() {
   const token = useAuthStore((state) => state.token)
