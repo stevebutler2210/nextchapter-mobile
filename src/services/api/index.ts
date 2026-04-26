@@ -9,7 +9,7 @@ import { ApisauceInstance, create } from "apisauce"
 
 import Config from "@/config"
 
-import type { ApiConfig, ApiErrorResponse, AuthResponse } from "./types"
+import type { ApiConfig, ApiErrorResponse, AuthResponse, ClubsResponse } from "./types"
 import { getGeneralApiProblem, type GeneralApiProblem } from "./apiProblem"
 
 /**
@@ -42,6 +42,32 @@ export class Api {
     })
   }
 
+  setupInterceptors(refreshFn: () => Promise<boolean>) {
+    this.apisauce.axiosInstance.interceptors.response.use(
+      (response) => response,
+      async (error) => {
+        const originalRequest = error.config
+        if (error.response?.status === 401 && !originalRequest._retry) {
+          originalRequest._retry = true
+          const refreshed = await refreshFn()
+          if (refreshed) {
+            originalRequest.headers["Authorization"] = this.apisauce.headers["Authorization"]
+            return this.apisauce.axiosInstance(originalRequest)
+          }
+        }
+        return Promise.reject(error)
+      }
+    )
+  }
+
+  setAuthToken(token: string) {
+    this.apisauce.setHeader("Authorization", `Bearer ${token}`)
+  }
+
+  clearAuthToken() {
+    this.apisauce.deleteHeader("Authorization")
+  }
+
   async signIn(email: string, password: string): Promise<
     { kind: "ok"; data: AuthResponse } |
     { kind: GeneralApiProblem["kind"]; data: ApiErrorResponse | undefined }
@@ -71,6 +97,19 @@ export class Api {
       return { kind: problem?.kind ?? "unknown", data: response.data as ApiErrorResponse }
     }
     return { kind: "ok", data: (response.data as any).data as AuthResponse }
+  }
+
+  async getClubs(): Promise<
+    { kind: "ok"; data: ClubsResponse } |
+    { kind: string; data: undefined }
+  > {
+    console.log("Auth header:", this.apisauce.headers["Authorization"])
+    const response = await this.apisauce.get<ClubsResponse>("/api/v1/clubs")
+    if (!response.ok) {
+      const problem = getGeneralApiProblem(response)
+      return { kind: problem?.kind ?? "unknown", data: undefined }
+    }
+    return { kind: "ok", data: response.data as ClubsResponse }
   }
 }
 

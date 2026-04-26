@@ -23,6 +23,6 @@
     --border: var(--color-outline-variant);
     --input: var(--color-surface-container);
     --ring: var(--color-primary);
-    --radius: var(--radius);
+    --radius: 4px;
   }
 }
