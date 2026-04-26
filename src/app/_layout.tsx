@@ -1,8 +1,11 @@
+import "../global.css"
+
 import { useEffect, useState } from "react"
 import { Slot, SplashScreen } from "expo-router"
 import { useFonts } from "@expo-google-fonts/space-grotesk"
 import { KeyboardProvider } from "react-native-keyboard-controller"
 import { initialWindowMetrics, SafeAreaProvider } from "react-native-safe-area-context"
+import { PortalHost } from '@rn-primitives/portal';
 
 import { initI18n } from "@/i18n"
 import { ThemeProvider } from "@/theme/context"
@@ -49,6 +52,7 @@ export default function Root() {
       <ThemeProvider>
         <KeyboardProvider>
           <Slot />
+          <PortalHost />
         </KeyboardProvider>
       </ThemeProvider>
     </SafeAreaProvider>

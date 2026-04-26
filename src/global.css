@@ -1,0 +1,28 @@
+@import 'tailwindcss';
+@import 'uniwind';
+@import "@stevebutler2210/nextchapter-design-tokens";
+
+@layer base {
+  :root {
+    /* Bridge RNR variables to NextChapter design tokens */
+    --background: var(--color-surface);
+    --foreground: var(--color-on-surface);
+    --card: var(--color-surface-container-lowest);
+    --card-foreground: var(--color-on-surface);
+    --popover: var(--color-surface-container-lowest);
+    --popover-foreground: var(--color-on-surface);
+    --primary: var(--color-primary);
+    --primary-foreground: var(--color-on-primary);
+    --secondary: var(--color-surface-container);
+    --secondary-foreground: var(--color-on-surface);
+    --muted: var(--color-surface-container-low);
+    --muted-foreground: var(--color-outline);
+    --accent: var(--color-tertiary-container);
+    --accent-foreground: var(--color-tertiary);
+    --destructive: 0 84.2% 60.2%;
+    --border: var(--color-outline-variant);
+    --input: var(--color-surface-container);
+    --ring: var(--color-primary);
+    --radius: var(--radius);
+  }
+}
