@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@expo-google-fonts/newsreader':
+        specifier: ^0.4.1
+        version: 0.4.1
       '@expo-google-fonts/space-grotesk':
         specifier: ^0.4.0
         version: 0.4.1
@@ -137,6 +140,9 @@ importers:
       uniwind:
         specifier: ^1.6.3
         version: 1.6.3(react-native@0.83.6(@babel/core@7.29.0)(@types/react@19.2.14)(react@19.2.0))(react@19.2.0)(tailwindcss@4.2.4)
+      zustand:
+        specifier: ^5.0.12
+        version: 5.0.12(@types/react@19.2.14)(react@19.2.0)(use-sync-external-store@1.6.0(react@19.2.0))
     devDependencies:
       '@babel/core':
         specifier: ^7.20.0
@@ -1119,6 +1125,9 @@ packages:
 
   '@expo-google-fonts/material-symbols@0.4.33':
     resolution: {integrity: sha512-GQFy5tx7LBiRJttLYhz+KPmoVCQSVXiJPXVgMt/d8BWYbnJmw0nFixZtOaZQJE9F/L6vni3totwPNmbrdMi3ow==}
+
+  '@expo-google-fonts/newsreader@0.4.1':
+    resolution: {integrity: sha512-j96W112+mj/VYP06DCq00w+twyw42w0MY7eHB/XXioNK80BcG0cIk/zogjOENZSY7qejzIFbHE/PZYqlh/6VKQ==}
 
   '@expo-google-fonts/space-grotesk@0.4.1':
     resolution: {integrity: sha512-ZVQYw4Ok/pgcSJiufP8oRZE3AVxS9xtmKEUfsurbHkHNdMc/GA1gDXP9G4Cr7KL4KqSc0haexR2TuMigotCn4Q==}
@@ -6910,6 +6919,8 @@ snapshots:
   '@eslint/js@8.57.1': {}
 
   '@expo-google-fonts/material-symbols@0.4.33': {}
+
+  '@expo-google-fonts/newsreader@0.4.1': {}
 
   '@expo-google-fonts/space-grotesk@0.4.1': {}
 

@@ -263,6 +263,7 @@ export function Screen(props: ScreenProps) {
         { backgroundColor: backgroundColor || colors.background },
         $containerInsets,
       ]}
+      className={backgroundColor ? "" : "bg-background"}
     >
       <SystemBars
         style={systemBarStyle || (themeContext === "dark" ? "light" : "dark")}

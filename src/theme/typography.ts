@@ -9,6 +9,10 @@ import {
   SpaceGrotesk_600SemiBold as spaceGroteskSemiBold,
   SpaceGrotesk_700Bold as spaceGroteskBold,
 } from "@expo-google-fonts/space-grotesk"
+import {
+  Newsreader_400Regular_Italic as newsreaderRegularItalic,
+  Newsreader_500Medium as newsreaderMedium,
+} from "@expo-google-fonts/newsreader"
 
 export const customFontsToLoad = {
   spaceGroteskLight,
@@ -16,6 +20,8 @@ export const customFontsToLoad = {
   spaceGroteskMedium,
   spaceGroteskSemiBold,
   spaceGroteskBold,
+  newsreaderMedium,
+  newsreaderRegularItalic,
 }
 
 const fonts = {

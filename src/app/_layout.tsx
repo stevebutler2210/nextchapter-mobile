@@ -1,7 +1,7 @@
 import "../global.css"
 
 import { useEffect, useState } from "react"
-import { Slot, SplashScreen } from "expo-router"
+import { Slot, SplashScreen, router} from "expo-router"
 import { useFonts } from "@expo-google-fonts/space-grotesk"
 import { KeyboardProvider } from "react-native-keyboard-controller"
 import { initialWindowMetrics, SafeAreaProvider } from "react-native-safe-area-context"
@@ -11,6 +11,8 @@ import { initI18n } from "@/i18n"
 import { ThemeProvider } from "@/theme/context"
 import { customFontsToLoad } from "@/theme/typography"
 import { loadDateFnsLocale } from "@/utils/formatDate"
+
+import { useAuthStore } from "@/stores/authStore"
 
 SplashScreen.preventAutoHideAsync()
 
@@ -38,14 +40,10 @@ export default function Root() {
   }, [fontError])
 
   useEffect(() => {
-    if (loaded) {
-      SplashScreen.hideAsync()
-    }
+    if (loaded) SplashScreen.hideAsync()
   }, [loaded])
 
-  if (!loaded) {
-    return null
-  }
+  if (!loaded) return null
 
   return (
     <SafeAreaProvider initialMetrics={initialWindowMetrics}>

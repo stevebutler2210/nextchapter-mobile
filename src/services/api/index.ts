@@ -9,7 +9,8 @@ import { ApisauceInstance, create } from "apisauce"
 
 import Config from "@/config"
 
-import type { ApiConfig } from "./types"
+import type { ApiConfig, ApiErrorResponse, AuthResponse } from "./types"
+import { getGeneralApiProblem, type GeneralApiProblem } from "./apiProblem"
 
 /**
  * Configuring the apisauce instance.
@@ -39,6 +40,37 @@ export class Api {
         Accept: "application/json",
       },
     })
+  }
+
+  async signIn(email: string, password: string): Promise<
+    { kind: "ok"; data: AuthResponse } |
+    { kind: GeneralApiProblem["kind"]; data: ApiErrorResponse | undefined }
+  > {
+    const response = await this.apisauce.post<AuthResponse, ApiErrorResponse>(
+      "/api/v1/sessions",
+      { email_address: email, password }
+    )
+    if (!response.ok) {
+      const problem = getGeneralApiProblem(response)
+      return { kind: problem?.kind ?? "unknown", data: response.data as ApiErrorResponse }
+
+    }
+    return { kind: "ok", data: (response.data as any).data as AuthResponse }
+  }
+
+  async signUp(name: string, email: string, password: string): Promise<
+    { kind: "ok"; data: AuthResponse } |
+    { kind: GeneralApiProblem["kind"]; data: ApiErrorResponse | undefined }
+  > {
+    const response = await this.apisauce.post<AuthResponse, ApiErrorResponse>(
+    "/api/v1/registrations",
+      { user: { name, email_address: email, password, password_confirmation: password } }
+    )
+    if (!response.ok) {
+      const problem = getGeneralApiProblem(response)
+      return { kind: problem?.kind ?? "unknown", data: response.data as ApiErrorResponse }
+    }
+    return { kind: "ok", data: (response.data as any).data as AuthResponse }
   }
 }
 
