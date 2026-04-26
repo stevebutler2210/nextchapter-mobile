@@ -41,7 +41,10 @@ export const useAuthStore = create<AuthState>((set) => ({
 
         // TODO: Remove these logs once we're confident the refresh flow is working correctly
         console.log("Attempting token refresh with refresh token:", refreshToken)
-        console.log("Current auth header before refresh attempt:", api.apisauce.headers["Authorization"])
+        console.log(
+          "Current auth header before refresh attempt:",
+          api.apisauce.headers["Authorization"],
+        )
         console.log("Auth token in store before refresh attempt:", token)
 
         if (!refreshToken) return false
