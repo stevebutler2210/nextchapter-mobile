@@ -68,7 +68,8 @@
       }
     ],
     "expo-build-properties",
-    "expo-router"
+    "expo-router",
+    "expo-secure-store"
   ],
   "experiments": {
     "tsconfigPaths": true,

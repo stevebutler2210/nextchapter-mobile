@@ -31,7 +31,7 @@ export default function SignUp() {
     setLoading(false)
 
     if (result.kind === "ok") {
-      setToken(result.data!.token)
+      await setToken(result.data!.token)
       router.replace("/(app)/(tabs)/clubs" as any)
     } else if (result.data?.errors) {
       setFieldErrors(result.data.errors as Record<string, string[]>)

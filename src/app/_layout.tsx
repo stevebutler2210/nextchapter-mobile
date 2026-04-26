@@ -27,13 +27,22 @@ export default function Root() {
   const [fontsLoaded, fontError] = useFonts(customFontsToLoad)
   const [isI18nInitialized, setIsI18nInitialized] = useState(false)
 
+  const rehydrate = useAuthStore((state) => state.rehydrate)
+  const hydrated = useAuthStore((state) => state.hydrated)
+
+  useEffect(() => {
+    if (!hydrated) {
+      rehydrate()
+    }
+  }, [rehydrate, hydrated])
+
   useEffect(() => {
     initI18n()
       .then(() => setIsI18nInitialized(true))
       .then(() => loadDateFnsLocale())
   }, [])
 
-  const loaded = fontsLoaded && isI18nInitialized
+  const loaded = fontsLoaded && isI18nInitialized && hydrated
 
   useEffect(() => {
     if (fontError) throw fontError
