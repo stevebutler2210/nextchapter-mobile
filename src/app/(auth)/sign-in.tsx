@@ -1,16 +1,18 @@
 import { useState } from "react"
-import { View, ActivityIndicator } from "react-native"
+import { View, ActivityIndicator, StyleSheet } from "react-native"
 import { router } from "expo-router"
-import { useAppTheme } from "@/theme/context"
-import { Text } from "@/components/ui/text"
+
+import { Screen } from "@/components/Screen"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Screen } from "@/components/Screen"
+import { Text } from "@/components/ui/text"
 import { api } from "@/services/api"
 import { useAuthStore } from "@/stores/authStore"
+import { useAppTheme } from "@/theme/context"
 
-const inputClassName = "bg-surface-container border-outline-variant/50 rounded-sm h-[50px] px-[14px] text-sm text-on-surface"
+const inputClassName =
+  "bg-surface-container border-outline-variant/50 rounded-sm h-[50px] px-[14px] text-sm text-on-surface"
 
 const labelClassName = "text-xs uppercase tracking-[0.1em] text-on-surface"
 
@@ -40,31 +42,21 @@ export default function SignIn() {
   }
 
   return (
-    <Screen
-      preset="fixed"
-      safeAreaEdges={["top"]}
-      contentContainerStyle={{ paddingHorizontal: 24 }}
-    >
-      <Text
-        className="text-center text-3xl text-on-surface mt-20"
-        style={{ fontFamily: 'newsreaderMedium' }}
-      >
+    <Screen preset="fixed" safeAreaEdges={["top"]} contentContainerStyle={styles.content}>
+      <Text className="text-center text-3xl text-on-surface mt-20" style={styles.titleFont}>
         NextChapter
       </Text>
-      <Text
-        className="text-center text-sm text-outline mt-2"
-        style={{ fontFamily: 'newsreaderRegularItalic' }}
-      >
+      <Text className="text-center text-sm text-outline mt-2" style={styles.subtitleFont}>
         A quiet space for intentional readers
       </Text>
 
       <View className="mt-12 gap-6">
-        {error && (
-          <Text className="text-primary text-sm text-center">{error}</Text>
-        )}
+        {error && <Text className="text-primary text-sm text-center">{error}</Text>}
 
         <View className="gap-1.5">
-          <Label htmlFor="email" className={labelClassName}>Email</Label>
+          <Label htmlFor="email" className={labelClassName}>
+            Email
+          </Label>
           <Input
             id="email"
             placeholder="you@example.com"
@@ -77,7 +69,9 @@ export default function SignIn() {
         </View>
 
         <View className="gap-1.5">
-          <Label htmlFor="password" className={labelClassName}>Password</Label>
+          <Label htmlFor="password" className={labelClassName}>
+            Password
+          </Label>
           <Input
             id="password"
             placeholder="••••••••"
@@ -93,15 +87,18 @@ export default function SignIn() {
           onPress={handleSignIn}
           disabled={loading}
         >
-          {loading
-            ? <ActivityIndicator color={colors.onPrimary} />
-            : <Text className="text-on-primary text-xs font-medium uppercase tracking-wider text-center">Sign In</Text>
-          }
+          {loading ? (
+            <ActivityIndicator color={colors.onPrimary} />
+          ) : (
+            <Text className="text-on-primary text-xs font-medium uppercase tracking-wider text-center">
+              Sign In
+            </Text>
+          )}
         </Button>
       </View>
 
       <Text className="text-center text-sm text-outline mt-6">
-        Don't have an account?{" "}
+        Don&apos;t have an account?{" "}
         <Text
           className="text-primary text-sm font-medium"
           onPress={() => router.push("/(auth)/sign-up" as any)}
@@ -112,3 +109,15 @@ export default function SignIn() {
     </Screen>
   )
 }
+
+const styles = StyleSheet.create({
+  content: {
+    paddingHorizontal: 24,
+  },
+  subtitleFont: {
+    fontFamily: "newsreaderRegularItalic",
+  },
+  titleFont: {
+    fontFamily: "newsreaderMedium",
+  },
+})

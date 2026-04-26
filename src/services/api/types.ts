@@ -29,3 +29,34 @@ export interface ClubSummary {
 export interface ClubsResponse {
   data: ClubSummary[]
 }
+
+export interface ClubDetail {
+  id: number
+  name: string
+  description: string
+  role: string
+  members: { id: number; name: string; role: string }[]
+  current_cycle: CycleDetail | null
+}
+
+export interface CycleDetail {
+  id: number
+  state: "nominating" | "voting" | "reading"
+  winning_book: BookData | null
+  nominations: NominationData[]
+}
+
+export interface NominationData {
+  id: number
+  book: BookData
+  nominated_by: { id: number; name: string }
+  votes_count: number
+}
+
+export interface BookData {
+  id: number
+  title: string
+  authors: string[]
+  cover_url: string | null
+  page_count: number | null
+}

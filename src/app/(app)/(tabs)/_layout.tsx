@@ -1,7 +1,8 @@
+import { StyleSheet } from "react-native"
 import { Tabs } from "expo-router"
-import { Text, StyleSheet } from "react-native"
-import { useAppTheme } from "../../../theme/context"
+
 import { ClubsIcon, ScanIcon, ProfileIcon } from "../../../components/TabIcons"
+import { useAppTheme } from "../../../theme/context"
 
 const styles = StyleSheet.create({
   tabBarLabelStyle: {
@@ -32,7 +33,7 @@ export default function TabLayout() {
         name="clubs"
         options={{
           title: "Clubs",
-          tabBarIcon: ({ color, focused }) => (
+          tabBarIcon: ({ focused }) => (
             <ClubsIcon size={22} color={focused ? colors.primary : colors.outline} />
           ),
         }}
@@ -41,7 +42,7 @@ export default function TabLayout() {
         name="scan"
         options={{
           title: "Scan",
-          tabBarIcon: ({ color, focused }) => (
+          tabBarIcon: ({ focused }) => (
             <ScanIcon size={22} color={focused ? colors.primary : colors.outline} />
           ),
         }}
@@ -50,7 +51,7 @@ export default function TabLayout() {
         name="profile"
         options={{
           title: "Profile",
-          tabBarIcon: ({ color, focused }) => (
+          tabBarIcon: ({ focused }) => (
             <ProfileIcon size={22} color={focused ? colors.primary : colors.outline} />
           ),
         }}

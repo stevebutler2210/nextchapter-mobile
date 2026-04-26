@@ -1,5 +1,6 @@
-import { create } from "zustand"
 import * as SecureStore from "expo-secure-store"
+import { create } from "zustand"
+
 import { api } from "@/services/api"
 
 const TOKEN_KEY = "auth_token"
