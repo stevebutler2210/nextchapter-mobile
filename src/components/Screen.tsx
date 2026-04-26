@@ -260,10 +260,9 @@ export function Screen(props: ScreenProps) {
     <View
       style={[
         $containerStyle,
-        { backgroundColor: backgroundColor || colors.background },
+        { backgroundColor: backgroundColor || colors.surface },
         $containerInsets,
       ]}
-      className={backgroundColor ? "" : "bg-background"}
     >
       <SystemBars
         style={systemBarStyle || (themeContext === "dark" ? "light" : "dark")}

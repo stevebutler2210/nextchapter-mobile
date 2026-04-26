@@ -13,3 +13,19 @@ export interface ApiErrorResponse {
   error?: string
   errors?: Record<string, string[]>
 }
+
+export interface ClubSummary {
+  id: number
+  name: string
+  description: string
+  role: string
+  current_cycle: {
+    id: number
+    state: "nominating" | "voting" | "reading"
+    nominations_count: number
+  } | null
+}
+
+export interface ClubsResponse {
+  data: ClubSummary[]
+}

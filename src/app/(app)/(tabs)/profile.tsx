@@ -5,12 +5,12 @@ import { Text } from "@/components/Text"
 import { useAuthStore } from "@/stores/authStore"
 
 export default function Profile() {
-  const clearToken = useAuthStore((state) => state.clearToken)
+  const clearTokens = useAuthStore((state) => state.clearTokens)
 
   return (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
       <Button onPress={async () => {
-        await clearToken()
+        await clearTokens()
         router.replace("/(auth)/sign-in" as any)
       }}>
         <Text>Sign Out</Text>

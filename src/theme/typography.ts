@@ -10,9 +10,14 @@ import {
   SpaceGrotesk_700Bold as spaceGroteskBold,
 } from "@expo-google-fonts/space-grotesk"
 import {
+  Newsreader_400Regular as newsreaderRegular,
   Newsreader_400Regular_Italic as newsreaderRegularItalic,
   Newsreader_500Medium as newsreaderMedium,
 } from "@expo-google-fonts/newsreader"
+import {
+  WorkSans_400Regular as workSansRegular,
+  WorkSans_500Medium as workSansMedium,
+} from "@expo-google-fonts/work-sans"
 
 export const customFontsToLoad = {
   spaceGroteskLight,
@@ -20,8 +25,11 @@ export const customFontsToLoad = {
   spaceGroteskMedium,
   spaceGroteskSemiBold,
   spaceGroteskBold,
+  newsreaderRegular,
   newsreaderMedium,
   newsreaderRegularItalic,
+  workSansRegular,
+  workSansMedium,
 }
 
 const fonts = {

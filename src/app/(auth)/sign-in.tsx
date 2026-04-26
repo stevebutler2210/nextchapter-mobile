@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { View, ActivityIndicator } from "react-native"
 import { router } from "expo-router"
+import { useAppTheme } from "@/theme/context"
 import { Text } from "@/components/ui/text"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -14,6 +15,8 @@ const inputClassName = "bg-surface-container border-outline-variant/50 rounded-s
 const labelClassName = "text-xs uppercase tracking-[0.1em] text-on-surface"
 
 export default function SignIn() {
+  const { theme } = useAppTheme()
+  const colors = theme.colors
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [loading, setLoading] = useState(false)
@@ -91,7 +94,7 @@ export default function SignIn() {
           disabled={loading}
         >
           {loading
-            ? <ActivityIndicator color="#ffffff" />
+            ? <ActivityIndicator color={colors.onPrimary} />
             : <Text className="text-on-primary text-xs font-medium uppercase tracking-wider text-center">Sign In</Text>
           }
         </Button>
