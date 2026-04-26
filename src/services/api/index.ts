@@ -52,7 +52,11 @@ export class Api {
       (response) => response,
       async (error) => {
         const originalRequest = error.config
-        if (error.response?.status === 401 && !originalRequest._retry) {
+        if (
+          error.response?.status === 401 &&
+          !originalRequest._retry &&
+          !originalRequest.url?.includes("/sessions/refresh")
+        ) {
           originalRequest._retry = true
           const refreshed = await refreshFn()
           if (refreshed) {

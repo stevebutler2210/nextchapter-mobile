@@ -1,5 +1,6 @@
-import { StyleSheet } from "react-native"
+import { StyleSheet, View } from "react-native"
 
+import { GatheredVolumesLogo } from "@/components/GatheredVolumesLogo"
 import { Text } from "@/components/ui/text"
 import { cn } from "@/lib/utils"
 
@@ -10,15 +11,19 @@ type AuthHeaderProps = {
 export function AuthHeader({ variant }: AuthHeaderProps) {
   return (
     <>
-      <Text
+      <View
         className={cn(
-          "text-center text-3xl text-on-surface",
+          "flex-row items-center justify-center gap-2",
           variant === "sign-in" ? "mt-20" : "mt-14",
         )}
-        style={styles.titleFont}
       >
-        NextChapter
-      </Text>
+        <View className="mb-1.5">
+          <GatheredVolumesLogo size={32} />
+        </View>
+        <Text className="text-3xl text-on-surface" style={styles.titleFont}>
+          NextChapter
+        </Text>
+      </View>
       <Text className="text-center text-sm text-outline mt-2" style={styles.subtitleFont}>
         A quiet space for intentional readers
       </Text>
