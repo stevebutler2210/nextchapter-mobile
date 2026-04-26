@@ -102,21 +102,22 @@ export default function Clubs() {
           ) : (
             <EmptyState />
           )}
-          ListFooterComponent={
-            <View className="items-center mt-8 mb-4">
-              <TouchableOpacity
-                className="bg-primary rounded-sm px-7 py-3.5"
-                activeOpacity={0.8}
-              >
-                <Text
-                  className="text-on-primary text-xs font-medium uppercase tracking-widest"
-                  style={{ fontFamily: "workSansMedium" }}
-                >
-                  Create a Club
-                </Text>
-              </TouchableOpacity>
-            </View>
-          }
+          /* Commenting until Write pass is in place */
+          // ListFooterComponent={
+          //   <View className="items-center mt-8 mb-4">
+          //     <TouchableOpacity
+          //       className="bg-primary rounded-sm px-7 py-3.5"
+          //       activeOpacity={0.8}
+          //     >
+          //       <Text
+          //         className="text-on-primary text-xs font-medium uppercase tracking-widest"
+          //         style={{ fontFamily: "workSansMedium" }}
+          //       >
+          //         Create a Club
+          //       </Text>
+          //     </TouchableOpacity>
+          //   </View>
+          // }
           refreshControl={
             <RefreshControl
               refreshing={refreshing}
