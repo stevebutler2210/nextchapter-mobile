@@ -1,5 +1,5 @@
 {
-  "name": "nextchapter-mobile",
+  "name": "NextChapter",
   "slug": "nextchapter-mobile",
   "scheme": "nextchapter-mobile",
   "version": "1.0.0",
@@ -25,7 +25,11 @@
     "edgeToEdgeEnabled": true
   },
   "ios": {
-    "icon": "./assets/images/app-icon-ios.png",
+    "icon": {
+      "light": "./assets/images/app-icon-ios.png",
+      "dark": "./assets/images/app-icon-ios-dark.png",
+      "tinted": "./assets/images/app-icon-ios-tinted.png"
+    },
     "supportsTablet": true,
     "bundleIdentifier": "com.nextchapter.mobile",
     "privacyManifests": {
@@ -52,10 +56,10 @@
     [
       "expo-splash-screen",
       {
-        "image": "./assets/images/app-icon-android-adaptive-foreground.png",
-        "imageWidth": 300,
+        "image": "./assets/images/splash.png",
+        "imageWidth": 200,
         "resizeMode": "contain",
-        "backgroundColor": "#191015"
+        "backgroundColor": "#fcf9f5"
       }
     ],
     [
