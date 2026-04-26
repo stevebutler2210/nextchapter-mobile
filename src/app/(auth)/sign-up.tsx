@@ -150,7 +150,7 @@ export default function SignUp() {
         Already have an account?{" "}
         <Text
           className="text-primary text-sm font-medium"
-          onPress={() => router.push("/(auth)/sign-in" as any)}
+          onPress={() => router.push("/(auth)/sign-in")}
         >
           Sign in
         </Text>
